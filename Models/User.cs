@@ -1,4 +1,4 @@
-namespace WebApi.Entities;
+namespace WebApi.Models;
 
 using System.Text.Json.Serialization;
 
