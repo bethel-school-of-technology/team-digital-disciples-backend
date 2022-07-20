@@ -8,6 +8,6 @@ public class PrayerResponse
 
     public string prayerTextResponse {get; set;}
 
-    public DateTime responseTimeStamp {get; set;}
+    public DateTime dateTime {get; set;}
     
 }
