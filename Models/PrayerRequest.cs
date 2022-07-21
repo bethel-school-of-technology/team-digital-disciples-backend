@@ -1,11 +1,13 @@
+using System.ComponentModel.DataAnnotations;
 namespace WebApi.Models;
 
-using System.ComponentModel.DataAnnotations;
+
 
 public class PrayerRequest
 {
-    [Required]
-    private int RequestId {get; set; }
+
+    [Key]
+    public int RequestId {get; set; }
 
     [Required]
     private int UserId { get; set; }

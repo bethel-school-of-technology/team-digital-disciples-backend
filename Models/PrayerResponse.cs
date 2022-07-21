@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
 namespace WebApi.Models;
 public class PrayerResponse
 {
+    [Key]
     public int responseId { get; set;}
     public int requestId {get; set;}
 

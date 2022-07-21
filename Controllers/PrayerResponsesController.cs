@@ -14,5 +14,25 @@ namespace WebApi.Controllers
         {
             _context = context;
         }
+        [HttpPost]
+        public JsonResult CreateResponse (PrayerResponse prayerResponse)
+        {
+            if(prayerResponse.responseId == 0)
+            {
+                _context.PrayerResponses.Add(prayerResponse);
+            }
+            else
+            {
+                var responseInDb = _context.PrayerResponses.Find(prayerResponse.responseId);
+                if (responseInDb == null)
+                    return new JsonResult(NotFound());
+
+                responseInDb = prayerResponse;
+                
+            }
+            
+            _context.SaveChanges();
+            return new JsonResult(Ok(prayerResponse));
+        }
     }
 }
