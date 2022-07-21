@@ -34,5 +34,19 @@ namespace WebApi.Controllers
             _context.SaveChanges();
             return new JsonResult(Ok(prayerResponse));
         }
+
+        [HttpGet]
+        public JsonResult GetPrayerResponseById (int id)
+        {
+            var result =  _context.PrayerResponses.Find(id);
+            if (result == null)
+            {
+                return new JsonResult(NotFound());
+            }
+            else
+            { 
+                return new JsonResult(Ok(result));
+            }
+        }
     }
 }
