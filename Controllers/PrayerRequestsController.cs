@@ -8,7 +8,7 @@ namespace WebApi.Controllers
     [ApiController]
     public class PrayerRequestsController : ControllerBase
     {
-        private readonly PrayerRequestContext _context;
+        private readonly z_context;
 
         public PrayerRequestsController(PrayerRequestContext context)
         {
