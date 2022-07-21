@@ -1,10 +1,16 @@
 ﻿using WebApi.Helpers;
 using WebApi.Services;
+using WebApi.Data;
+using Microsoft.EntityFrameworkCore; 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // add services to DI container
 {
+    //Adding DBContext DI
+    builder.Services.AddDbContext<ApiContext>
+    (opt => opt.UseSqlite("Data Source=" + Path.GetFullPath("PrayerDb")));
+
     var services = builder.Services;
     services.AddCors();
     services.AddControllers();

@@ -1,6 +1,6 @@
 namespace WebApi.Models;
 
-using WebApi.Entities;
+using WebApi.Models;
 
 public class AuthenticateResponse
 {
