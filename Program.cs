@@ -7,9 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // add services to DI container
 {
-    //Adding DBContect will change to actual database later -CR
+    //Adding DBContext DI
     builder.Services.AddDbContext<ApiContext>
-    (opt => opt.UseInMemoryDatabase("PrayerDb"));
+    (opt => opt.UseSqlite("Data Source=" + Path.GetFullPath("PrayerDb")));
 
     var services = builder.Services;
     services.AddCors();
