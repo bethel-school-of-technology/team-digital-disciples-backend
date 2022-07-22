@@ -11,7 +11,7 @@ using WebApi.Data;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20220721124247_InitialCreate")]
+    [Migration("20220722000950_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,13 +52,16 @@ namespace WebApi.Migrations
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ministerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("opId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("prayerTextResponse")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("requestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("userId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("responseId");

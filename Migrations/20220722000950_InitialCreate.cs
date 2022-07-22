@@ -32,7 +32,8 @@ namespace WebApi.Migrations
                     responseId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     requestId = table.Column<int>(type: "INTEGER", nullable: false),
-                    userId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ministerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    opId = table.Column<int>(type: "INTEGER", nullable: false),
                     prayerTextResponse = table.Column<string>(type: "TEXT", nullable: true),
                     dateTime = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },

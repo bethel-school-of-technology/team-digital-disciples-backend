@@ -50,13 +50,16 @@ namespace WebApi.Migrations
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ministerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("opId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("prayerTextResponse")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("requestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("userId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("responseId");
