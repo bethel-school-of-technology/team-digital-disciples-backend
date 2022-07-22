@@ -15,22 +15,54 @@ namespace WebApi.Controllers
            _context = context;
         }
       
+      //Create and Edit prayer request
+      //POST: api/newRequest
+      [HttpPost("newAsk")] //can this just be "new" or does it need a new name because "new" is already being used in PrayerRequest
+      public JsonResult CreatePrayerRequest(PrayerRequest PrayerRequest)
+      {
+        if(PrayerRequest.RequestId == 0)
+        {
+            _context.PrayerRequests.Add(PrayerRequest); //create new request
+        }else
+        {
+          var requestInDb = _context.PrayerRequests.Find(PrayerRequest.RequestId);
+
+          if(requestInDb == null)
+            return new JsonResult(NotFound());
+
+            requestInDb = PrayerRequest;
+        }
+
+        _context.SaveChanges();
+
+        return new JsonResult(Ok(PrayerRequest));
+
+      }
       
-       //submit 1 prayer request to database
-    /* [HttpPost]
-    SubmitPrayerRequest() */
 
 
+    // GET:api/request/5 Get 1 prayer request (allows user to change current request)
+    // [HttpPostAttribute]
+    // UpdatePrayerRequest(RequestId)
+    
+    [HttpGet("{RequestId}")]
 
-   /*  Get 1 prayer request (allows user to change current request)
-    [HttpPostAttribute]
-    UpdatePrayerRequest(requestId) */
+    public JsonResult GetOneRequest(int RequestId);
+    {
+        var result =  _context.PrayerRequests.Find(RequestId);
+
+        if (result == null)
+            return new JsonResult(NotFound());
+        RequestTrailerExtensions new JsonResult(Ok(result));    
+
+        
+   }
 
     
-
-    //get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
+//get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
     //[HttpGet]
     //GetAllPrayerRequests(userId)
+   
 
 
 
