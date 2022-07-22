@@ -14,7 +14,7 @@ namespace WebApi.Controllers
         {
             _context = context;
         }
-        [HttpPost]
+        [HttpPost("new")]
         public JsonResult CreateResponse (PrayerResponse prayerResponse)
         {
             if(prayerResponse.responseId == 0)
@@ -23,22 +23,16 @@ namespace WebApi.Controllers
             }
             else
             {
-                var responseInDb = _context.PrayerResponses.Find(prayerResponse.responseId);
-                if (responseInDb == null)
-                    return new JsonResult(NotFound());
-
-                responseInDb = prayerResponse;
-                
+                return new JsonResult(NotFound());
             }
-            
             _context.SaveChanges();
             return new JsonResult(Ok(prayerResponse));
         }
 
         [HttpGet]
-        public JsonResult GetPrayerResponseById (int id)
+        public JsonResult GetPrayerResponseByOpId (int id)
         {
-            var result =  _context.PrayerResponses.Find(id);
+            var result =  _context.PrayerResponses.Where(opId == id);
             if (result == null)
             {
                 return new JsonResult(NotFound());
