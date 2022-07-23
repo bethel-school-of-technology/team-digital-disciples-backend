@@ -15,22 +15,17 @@ namespace WebApi.Controllers
            _context = context;
         }
       
-      //Create and Edit prayer request
-      //POST: api/prayerRequest/new
+      //Create prayer request
+      //POST: api/prayerRequests/new
       [HttpPost("new")] 
       public JsonResult CreatePrayerRequest(PrayerRequest aRequest)
       {
         if(aRequest.RequestId == 0)
         {
-            _context.PrayerRequests.Add(aRequest); //create new request
+            _context.PrayerRequests.Add(aRequest); 
         }else
         {
-          var requestInDb = _context.PrayerRequests.Find(aRequest.RequestId);
-
-          if(requestInDb == null)
             return new JsonResult(NotFound());
-
-            requestInDb = aRequest;
         }
 
         _context.SaveChanges();
@@ -41,25 +36,27 @@ namespace WebApi.Controllers
       
 
 
-    // GET:api/PrayerRequest/5 
-    // GetOnePrayerRequest(RequestId)
-    // [HttpGet("{RequestId}")]
+    // GET:api/PrayerRequests/5 
+    // GetOnePrayerRequest(RequestId)  EDIT
+    [HttpGet("{RequestId}")]
 
-    // public JsonResult GetOneRequest(int RequestId);
-    // {
-    //     var result =  _context.PrayerRequests.Find(RequestId);
+    public JsonResult GetOneRequest(int requestId)
+    {
+        var result =  _context.PrayerRequests.Find(requestId);
 
-    //     if (result == null)
-    //         return new JsonResult(NotFound());
-    //     return new JsonResult(Ok(result));    
-       
-    // }
+        if (result == null)
+          return new JsonResult(NotFound());
+        else
+          return new JsonResult(Ok(result));   
+    }
 
     
 //get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
     //[HttpGet]
     //GetAllPrayerRequests(userId)
-   
+  //  [HttpGet("{Id}")]
+  //  public JsonResult GetAllRequests(int Id)
+
 
 
 
@@ -69,7 +66,8 @@ namespace WebApi.Controllers
 
 
 
-    /* toggle the isAnswered bool to yes (function that counts the number of isAnswered==yes)
+    /* toggle the isAnswered bool to yes (function that counts the number of isAnswered==yes) changed on front end and received and saved on back-end
+    funcion that is a post function gets a reuqest by id, and update in database with object passed from Angular send back "is true"
     [HttpPost] 
     TogglePrayerAnswered(requestId)  */
       
