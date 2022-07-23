@@ -54,8 +54,16 @@ namespace WebApi.Controllers
 //get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
     //[HttpGet]
     //GetAllPrayerRequests(userId)
-  //  [HttpGet("{Id}")]
-  //  public JsonResult GetAllRequests(int Id)
+   [HttpGet("{Id}")]
+   public JsonResult GetAllRequests(int Id)
+   {
+      var result = _context.Users.Find(Id);
+
+      if (result == null)
+        return new JsonResult(NotFound());
+      else
+        return new JsonResult(Ok(result));
+   }
 
 
 
