@@ -66,13 +66,22 @@ namespace WebApi.Controllers
   //  }
 
 
-   /*  delete 1 prayer request (Deletes the request matching the requestId passed into function)
-    DeletePrayerRequest(requestId) */
-    // [HttpDelete("{RequestId}")]
-    // public JsonResult DeleteOne(int requestid)
-    // {
+   // delete 1 prayer request (Deletes the request matching the requestId passed into function)
+    //DETETE /api/PrayerRequests/deleteOne/2
+    [HttpDelete("deleteOne/{RequestId}")]
+    public JsonResult DeleteOne(int requestId)
+    {
+      var result = _context.PrayerRequests.Find(requestId);
+      
+      if(result == null)
+        return new JsonResult(NotFound());
 
-    // }
+      _context.PrayerRequests.Remove(result);
+      _context.SaveChanges();
+
+      return new JsonResult(NoContent());
+
+    }
 
 
     /* toggle the isAnswered bool to yes (function that counts the number of isAnswered==yes) changed on front end and received and saved on back-end
