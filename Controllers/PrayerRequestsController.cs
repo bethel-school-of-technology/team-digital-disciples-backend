@@ -16,47 +16,44 @@ namespace WebApi.Controllers
         }
       
       //Create and Edit prayer request
-      //POST: api/newRequest
-      [HttpPost("newAsk")] //can this just be "new" or does it need a new name because "new" is already being used in PrayerRequest
-      public JsonResult CreatePrayerRequest(PrayerRequest PrayerRequest)
+      //POST: api/prayerRequest/new
+      [HttpPost("new")] 
+      public JsonResult CreatePrayerRequest(PrayerRequest aRequest)
       {
-        if(PrayerRequest.RequestId == 0)
+        if(aRequest.RequestId == 0)
         {
-            _context.PrayerRequests.Add(PrayerRequest); //create new request
+            _context.PrayerRequests.Add(aRequest); //create new request
         }else
         {
-          var requestInDb = _context.PrayerRequests.Find(PrayerRequest.RequestId);
+          var requestInDb = _context.PrayerRequests.Find(aRequest.RequestId);
 
           if(requestInDb == null)
             return new JsonResult(NotFound());
 
-            requestInDb = PrayerRequest;
+            requestInDb = aRequest;
         }
 
         _context.SaveChanges();
 
-        return new JsonResult(Ok(PrayerRequest));
+        return new JsonResult(Ok(aRequest));
 
       }
       
 
 
-    // GET:api/request/5 Get 1 prayer request (allows user to change current request)
-    // [HttpPostAttribute]
-    // UpdatePrayerRequest(RequestId)
-    
-    [HttpGet("{RequestId}")]
+    // GET:api/PrayerRequest/5 
+    // GetOnePrayerRequest(RequestId)
+    // [HttpGet("{RequestId}")]
 
-    public JsonResult GetOneRequest(int RequestId);
-    {
-        var result =  _context.PrayerRequests.Find(RequestId);
+    // public JsonResult GetOneRequest(int RequestId);
+    // {
+    //     var result =  _context.PrayerRequests.Find(RequestId);
 
-        if (result == null)
-            return new JsonResult(NotFound());
-        RequestTrailerExtensions new JsonResult(Ok(result));    
-
-        
-   }
+    //     if (result == null)
+    //         return new JsonResult(NotFound());
+    //     return new JsonResult(Ok(result));    
+       
+    // }
 
     
 //get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
