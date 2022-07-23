@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
 using WebApi.Data;
+using System.Collections.Generic;
 namespace WebApi.Controllers
 {
     [Route("api/[Controller]")]
@@ -50,19 +51,13 @@ namespace WebApi.Controllers
           return new JsonResult(Ok(result));   
     }
 
-    
-//get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
-    //api/PrayerRequests/getAll
-    //GetAllPrayerRequests(userId)
+    //This still needs to be tested with Postman
+  //   //api/PrayerRequests/getAll/1 ( gets a list of all prayer requests submitted by user matching userId)
+  //   //GetAllPrayerRequests(userId)
   //  [HttpGet("{UserId}")]
-  //  public JsonResult GetAllRequests(int userid)
+  //  public List<PrayerRequest> GetAllRequests(int userid)
   //  {
-  //     var result = _context.PrayerRequests.Find(userid); 
-
-  //     if (result == null)
-  //       return new JsonResult(NotFound());
-  //     else
-  //       return new JsonResult(Ok(result));// return a list Ienneumerable?
+  //     return _context.PrayerRequests.ToList();  
   //  }
 
 
