@@ -36,9 +36,9 @@ namespace WebApi.Controllers
       
 
 
-    // GET:api/PrayerRequests/5 
+    // GET:api/PrayerRequests/getone/5 
     // GetOnePrayerRequest(RequestId)  EDIT
-    [HttpGet("{RequestId}")]
+    [HttpGet("getone/{RequestId}")]
 
     public JsonResult GetOneRequest(int requestId)
     {
@@ -52,26 +52,27 @@ namespace WebApi.Controllers
 
     
 //get all prayer requests by userID ( gets a list of all prayer requests submitted by user matching userId)
-    //[HttpGet]
+    //api/PrayerRequests/getAll
     //GetAllPrayerRequests(userId)
-   [HttpGet("{Id}")]
-   public JsonResult GetAllRequests(int Id)
-   {
-      var result = _context.Users.Find(Id);
+  //  [HttpGet("{UserId}")]
+  //  public JsonResult GetAllRequests(int userid)
+  //  {
+  //     var result = _context.PrayerRequests.Find(userid); 
 
-      if (result == null)
-        return new JsonResult(NotFound());
-      else
-        return new JsonResult(Ok(result));
-   }
-
-
+  //     if (result == null)
+  //       return new JsonResult(NotFound());
+  //     else
+  //       return new JsonResult(Ok(result));// return a list Ienneumerable?
+  //  }
 
 
    /*  delete 1 prayer request (Deletes the request matching the requestId passed into function)
-    [HttpDeleteAttribute]
     DeletePrayerRequest(requestId) */
+    // [HttpDelete("{RequestId}")]
+    // public JsonResult DeleteOne(int requestid)
+    // {
 
+    // }
 
 
     /* toggle the isAnswered bool to yes (function that counts the number of isAnswered==yes) changed on front end and received and saved on back-end
