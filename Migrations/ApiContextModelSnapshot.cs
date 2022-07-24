@@ -36,6 +36,9 @@ namespace WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("RequestId");
 
                     b.ToTable("PrayerRequests");

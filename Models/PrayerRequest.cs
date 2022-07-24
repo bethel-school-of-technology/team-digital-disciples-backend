@@ -10,7 +10,7 @@ public class PrayerRequest
     public int RequestId {get; set; }
 
     [Required]
-    private int UserId { get; set; }
+    public int UserId { get; set; }
 
     [Required]
     public string PrayerAsk { get; set; }
