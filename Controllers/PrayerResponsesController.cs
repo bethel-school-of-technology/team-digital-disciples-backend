@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         return new JsonResult(Ok("User Added"));
         }
 
-        [HttpGet("inbox")]
+        [HttpGet("inbox/{opId}")]
         public IEnumerable<PrayerResponse> GetInbox(int opId)
         {
         return _prayerResponseRepository.GetInbox(opId);
