@@ -37,9 +37,16 @@ namespace WebApi.Controllers
            
   //PUT: edit a prayer request
   //   :api/PrayerRequests/updatOne/1
-  //UNDER REVIEW BY CR -TESTING WITH POSTMAN
-  [HttpPut("updateOne/{RequestId}")]
-  public PrayerRequest UpdateRequest(PrayerRequest newRequest)
+
+  //------------------------------------------------------------------------------------------
+  //chaged methed from PUT TO POST as we are working with a readonly _prayerRequestRepository and you can't do that with PUT
+  //Removed the "/{requestId}" from the HTTP as we are passing the entire object to the api through the body as a PrayerRequest object
+  //In IPrayerRequestRepository and PrayerRequestRepository, changed the return type of the function from PrayerRequest to bool as we only need to know if it was added to database or not
+  //changed method return type to Json Result as we just need to know that it was successfully updated
+  //TESTED ON POSTMAN CR - It is WORKING 7-26-2022
+  //--------------------------------------------------------------------------------------------
+  [HttpPost("updateOne")]
+  public JsonResult UpdateRequest(PrayerRequest newRequest)
       {// do data validation for all fields
         if(newRequest == null || !ModelState.IsValid)
         {
@@ -47,11 +54,19 @@ namespace WebApi.Controllers
           return null;
         }
          
-        return _prayerRequestRepository.UpdateRequest(newRequest); 
+        var result = _prayerRequestRepository.UpdateRequest(newRequest);
+        if (result)
+        {
+          return new JsonResult(Ok("Successfully Updated Request"));
+        }
+        return new JsonResult(BadRequest("Prayer Request Doesn't exist in database"));
+
       }
+
 
       // GET:api/PrayerRequests/getone/5 
     // GetOnePrayerRequest(RequestId) 
+   //UNDER REVIEW BY CR -TESTING WITH POSTMAN
     [HttpGet("getone/{RequestId}")]
 
     public PrayerRequest GetOneRequest(int requestId)

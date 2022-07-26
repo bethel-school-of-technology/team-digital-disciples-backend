@@ -20,17 +20,19 @@ namespace WebApi.Repositories;
         return aRequest; 
        
     }
-    public  PrayerRequest UpdateRequest(PrayerRequest newRequest)
+    public bool UpdateRequest(PrayerRequest newRequest)
     {
         var request = _context.PrayerRequests.FirstOrDefault(r => r.RequestId == newRequest.RequestId);
+        Console.WriteLine("Database returns this: " + request);
         if(request != null)
         {
             request.PrayerAsk = newRequest.PrayerAsk;
             request.IsAnswered = newRequest.IsAnswered;
             request.IsRespondedTo = newRequest.IsRespondedTo;
+            _context.SaveChanges();
+            return true;
         }
-        _context.SaveChanges();
-        return request;
+        return false;
     }
 
     public PrayerRequest GetOneRequest(int requestId)
