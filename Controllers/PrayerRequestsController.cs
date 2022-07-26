@@ -41,7 +41,7 @@ namespace WebApi.Controllers
   //------------------------------------------------------------------------------------------
   //chaged methed from PUT TO POST as we are working with a readonly _prayerRequestRepository and you can't do that with PUT
   //Removed the "/{requestId}" from the HTTP as we are passing the entire object to the api through the body as a PrayerRequest object
-  //In IPrayerRequestRepository and PrayerRequestRepository, changed the return type of the function from PrayerRequest to bool as we only need to know if it was added to database or not
+  //In IPrayerRequestRepository and PrayerRequestRepository, changed the return type of the UpdateOne function from PrayerRequest to bool as we only need to know if it was added to database or not
   //changed method return type to Json Result as we just need to know that it was successfully updated
   //TESTED ON POSTMAN CR - It is WORKING 7-26-2022
   //--------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ namespace WebApi.Controllers
 
       // GET:api/PrayerRequests/getone/5 
     // GetOnePrayerRequest(RequestId) 
-   //UNDER REVIEW BY CR -TESTING WITH POSTMAN
+
     [HttpGet("getone/{RequestId}")]
 
     public PrayerRequest GetOneRequest(int requestId)
@@ -74,10 +74,11 @@ namespace WebApi.Controllers
       return _prayerRequestRepository.GetOneRequest(requestId);
     }   
 
-    //This still needs to be tested with Postman
-  //   //api/PrayerRequests/getAll/1 ( gets a list of all prayer requests submitted by user matching userId)
-  //   //GetAllPrayerRequests(userId)
-   [HttpGet("{UserId}")]
+  //api/PrayerRequests/getAll/1 ( gets a list of all prayer requests submitted by user matching userId)
+  //GetAllPrayerRequests(userId)
+ //CHANGED HTTPGet Method from [HttpGet("{UserId}")] to [HttpGet("getAll/{UserId}")]
+ //TESTED BY CR ON POSTMAN.  WORKING 7-26-2022
+    [HttpGet("getAll/{UserId}")]
    public IEnumerable<PrayerRequest> GetUserPrayerRequests(int userid)
    {
       return _prayerRequestRepository.GetUserPrayerRequests(userid);  
