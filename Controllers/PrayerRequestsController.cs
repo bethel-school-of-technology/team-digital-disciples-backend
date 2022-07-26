@@ -35,7 +35,8 @@ namespace WebApi.Controllers
 
       }
       
-
+  //PUT: edit a prayer request
+  
 
     // GET:api/PrayerRequests/getone/5 
     // GetOnePrayerRequest(RequestId)  EDIT
@@ -59,6 +60,7 @@ namespace WebApi.Controllers
   //  {
   //     return _context.PrayerRequests.ToList();  
   //  }
+  
 
 
    // delete 1 prayer request (Deletes the request matching the requestId passed into function)
@@ -82,7 +84,7 @@ namespace WebApi.Controllers
     /* toggle the isAnswered bool to yes (function that counts the number of isAnswered==yes) changed on front end and received and saved on back-end
     funcion that is a post function gets a reuqest by id, and update in database with object passed from Angular send back "is true"
     [HttpPost] 
-    TogglePrayerAnswered(requestId)  */
+    PrayerAnswered(requestId)  */
       
     }
 
