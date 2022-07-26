@@ -88,18 +88,32 @@ namespace WebApi.Controllers
 
    // delete 1 prayer request (Deletes the request matching the requestId passed into function)
     //DETETE /api/PrayerRequests/deleteOne/2
+    //Changed Return Type to JsonResult as we only need to know that it was deleted
+    //Changed Interface and Repository Delete Function to return type of bool as we only need true or false returned.
+    //add if statement below to check if true or false and return appropriate message to front end
+    //added _context.SaveChages() to the PrayerRequestRepository funtion so that changes would be saved in database
+    //TESTED AND WORKING - CR - 7-26-2022
     [HttpDelete("deleteOne/{RequestId}")]
-    public void DeleteOne(int requestId)
+    public JsonResult DeleteOne(int requestId)
     {
-      _prayerRequestRepository.DeleteOne(requestId);
-      Response.StatusCode = (int) HttpStatusCode.NoContent;
+      var result = _prayerRequestRepository.DeleteOne(requestId);
+
+      if (result)
+      {
+        return new JsonResult(Ok("Record Successfully Deleted"));
+      }
+      return new JsonResult(BadRequest("Prayer Request does not Exist in the Database"));
+
     }
 
-//  GET  /api/PrayerRequests/unresponded/false
-    [HttpGet("unresponded/{IsRespondedTo}")]
-    public IEnumerable<PrayerRequest> GetAllFalse(bool isRespondedTo)
+//  GET  /api/PrayerRequests/unresponded
+// removed bool false out of the function parameter as this function does not require a paremeter to be passed into it.  It simply needs to be excecuted
+//Did the same thing in the interface and repository
+//TESTED AND WORKING - CR - 7-26-2022
+    [HttpGet("unresponded")]
+    public IEnumerable<PrayerRequest> GetAllFalse()
     {
-        return _prayerRequestRepository.GetAllFalse(isRespondedTo); 
+        return _prayerRequestRepository.GetAllFalse(); 
     }
       
     }

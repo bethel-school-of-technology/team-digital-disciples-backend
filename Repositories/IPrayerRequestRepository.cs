@@ -8,10 +8,10 @@ public interface IPrayerRequestRepository
    PrayerRequest CreatePrayerRequest(PrayerRequest aRequest);
    
     bool UpdateRequest(PrayerRequest newRequest);
-    void DeleteOne(int requestId);
+    bool DeleteOne(int requestId);
     PrayerRequest GetOneRequest(int requestId);
 
     IEnumerable<PrayerRequest> GetUserPrayerRequests(int userId);
 
-   IEnumerable<PrayerRequest> GetAllFalse( bool responded);
+   IEnumerable<PrayerRequest> GetAllFalse();
 }

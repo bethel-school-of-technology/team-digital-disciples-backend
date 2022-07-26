@@ -40,11 +40,16 @@ namespace WebApi.Repositories;
        return _context.PrayerRequests.FirstOrDefault(r => r.RequestId == requestId);
     }
     
-    public void DeleteOne(int requestId)
+    public bool DeleteOne(int requestId)
     {
        var request =  _context.PrayerRequests.FirstOrDefault(r => r.RequestId == requestId);
         if (request != null)
-        { _context.PrayerRequests.Remove(request);}
+        { 
+            _context.PrayerRequests.Remove(request);
+            _context.SaveChanges();
+            return true;
+        }
+        return false;
     }
 
     public IEnumerable<PrayerRequest> GetUserPrayerRequests(int userId)
@@ -54,7 +59,7 @@ namespace WebApi.Repositories;
 
    
     // Is this taken care of in the UpdateRequest method? or does it need it's own?
-    public IEnumerable<PrayerRequest> GetAllFalse(bool responded)
+    public IEnumerable<PrayerRequest> GetAllFalse()
     {
         return _context.PrayerRequests.Where(x => x.IsRespondedTo == false);
     }
