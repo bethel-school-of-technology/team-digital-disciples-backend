@@ -23,6 +23,7 @@ namespace WebApi.Controllers
       
       //Create prayer request
       //POST: api/prayerRequests/new
+      //TESTED BY CR - WORKS ON POSTMAN 7-26-2022
       [HttpPost("new")] 
       public PrayerRequest CreatePrayerRequest(PrayerRequest aRequest)
       {// do data validation for all fields
@@ -36,6 +37,7 @@ namespace WebApi.Controllers
            
   //PUT: edit a prayer request
   //   :api/PrayerRequests/updatOne/1
+  //UNDER REVIEW BY CR -TESTING WITH POSTMAN
   [HttpPut("updateOne/{RequestId}")]
   public PrayerRequest UpdateRequest(PrayerRequest newRequest)
       {// do data validation for all fields
