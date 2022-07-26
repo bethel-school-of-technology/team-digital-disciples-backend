@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddDbContext<ApiContext>
     (opt => opt.UseSqlite("Data Source=" + Path.GetFullPath("PrayerDb")));
     builder.Services.AddSingleton<IPrayerResponseRepository, PrayerResponseRepository>();
+    builder.Services.AddSingleton<IPrayerRequestRepository, PrayerRequestRepository>();
     var services = builder.Services;
     services.AddCors();
     services.AddControllers();
