@@ -1,5 +1,4 @@
 using WebApi.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Repositories;
 
