@@ -66,7 +66,7 @@ namespace WebApi.Controllers
 
       // GET:api/PrayerRequests/getone/5 
     // GetOnePrayerRequest(RequestId) 
-
+    // TESTED AND WORKING - CR - 7-26-2022
     [HttpGet("getone/{RequestId}")]
 
     public PrayerRequest GetOneRequest(int requestId)
