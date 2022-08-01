@@ -37,7 +37,7 @@ public class UsersController : ControllerBase
             Username = model.Username,
             Password = model.Password
         };
-
+        
         _userService.NewUser(newUser);
 
         return Ok(newUser);
