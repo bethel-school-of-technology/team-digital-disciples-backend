@@ -37,6 +37,7 @@ public class UserService : IUserService
 
     public AuthenticateResponse Authenticate(AuthenticateRequest model)
     {
+        model.HashPasword();
         var user = _context.Users.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
 
         // return null if user not found
@@ -60,6 +61,7 @@ public class UserService : IUserService
 
     public void NewUser(User user)
     {
+        user.HashPasword();
         _context.Add(user);
         _context.SaveChanges();
     }
