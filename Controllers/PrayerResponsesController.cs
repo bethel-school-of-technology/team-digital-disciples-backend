@@ -20,13 +20,14 @@ namespace WebApi.Controllers
             _logger = logger;
             _prayerResponseRepository = repo;
         }
+        [Authorize]
         [HttpPost("new")]
         public JsonResult NewPrayerResponse(PrayerResponse prayerResponse)
         {
         _prayerResponseRepository.AddPrayerResponse(prayerResponse);
         return new JsonResult(Ok("User Added"));
         }
-
+        [Authorize]
         [HttpGet("inbox/{opId}")]
         public IEnumerable<PrayerResponse> GetInbox(int opId)
         {
