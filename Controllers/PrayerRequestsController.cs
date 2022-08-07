@@ -5,10 +5,12 @@ using WebApi.Data;
 using System.Collections.Generic;
 using WebApi.Repositories;
 using System.Net;
+using WebApi.Helpers;
 
 namespace WebApi.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize]
     [ApiController]
     public class PrayerRequestsController : ControllerBase
     {

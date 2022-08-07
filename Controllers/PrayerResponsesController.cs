@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
 using WebApi.Data;
 using WebApi.Repositories;
+using WebApi.Helpers;
 namespace WebApi.Controllers
+
 {
     [Route("api/[Controller]")]
+    [Authorize]
     [ApiController]
     public class PrayerResponsesController : ControllerBase
     {
