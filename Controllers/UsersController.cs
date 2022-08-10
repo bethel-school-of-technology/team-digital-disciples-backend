@@ -54,11 +54,12 @@ public class UsersController : ControllerBase
         return Ok(response);
     }
 
-    [Authorize]
-    [HttpGet]
-    public IActionResult GetAll()
+    [HttpGet("getone/{userId}")]
+    public User GetUserById(int userId)
     {
-        var users = _userService.GetAll();
-        return Ok(users);
+        var user = _userService.GetById(userId);
+        return user;
     }
+
+    
 }

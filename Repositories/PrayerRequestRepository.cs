@@ -51,6 +51,11 @@ namespace WebApi.Repositories;
         }
         return false;
     }
+    public void ToggleResponded (int requestId){
+        var request = _context.PrayerRequests.FirstOrDefault(r => r.RequestId == requestId);
+        request.IsRespondedTo = true;
+        _context.SaveChanges();
+    }
 
     public IEnumerable<PrayerRequest> GetUserPrayerRequests(int userId)
     {

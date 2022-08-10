@@ -11,17 +11,21 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<PrayerResponsesController> _logger;
         private readonly IPrayerResponseRepository _prayerResponseRepository;
+        private readonly IPrayerRequestRepository _prayerRequestRepository;
 
-        public PrayerResponsesController(ILogger<PrayerResponsesController> logger, IPrayerResponseRepository repo)
+        public PrayerResponsesController(ILogger<PrayerResponsesController> logger, IPrayerResponseRepository responseRepo, IPrayerRequestRepository requestRepo)
         {
             _logger = logger;
-            _prayerResponseRepository = repo;
+            _prayerResponseRepository = responseRepo;
+            _prayerRequestRepository = requestRepo;
         }
         [HttpPost("new")]
         public JsonResult NewPrayerResponse(PrayerResponse prayerResponse)
         {
         _prayerResponseRepository.AddPrayerResponse(prayerResponse);
-        return new JsonResult(Ok("User Added"));
+        _prayerRequestRepository.ToggleResponded(prayerResponse.requestId);
+    
+        return new JsonResult(Ok("Prayer Response Added"));
         }
 
         [HttpGet("inbox/{opId}")]

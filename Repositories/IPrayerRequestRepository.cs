@@ -13,5 +13,7 @@ public interface IPrayerRequestRepository
 
     IEnumerable<PrayerRequest> GetUserPrayerRequests(int userId);
 
+    void ToggleResponded (int requestId);
+
    IEnumerable<PrayerRequest> GetAllFalse();
 }
