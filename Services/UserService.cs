@@ -13,7 +13,7 @@ public interface IUserService
 {
     AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<User> GetAll();
-    User GetById(int id);
+    User GetById(int UserId);
     bool UserExistByUsername(string username);
     void NewUser(User user);
 }
@@ -54,9 +54,9 @@ public class UserService : IUserService
         return _context.Users.ToList();
     }
 
-    public User GetById(int id)
+    public User GetById(int UserId)
     {
-        return _context.Users.FirstOrDefault(x => x.Id == id);
+        return _context.Users.FirstOrDefault(x => x.Id == UserId);
     }
 
     public void NewUser(User user)
