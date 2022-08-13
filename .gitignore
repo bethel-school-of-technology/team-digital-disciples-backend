@@ -41,3 +41,7 @@ typings
 # .NET compiled files
 bin
 obj
+PrayerDb-shm
+PrayerDb
+PrayerDb
+PrayerDb
