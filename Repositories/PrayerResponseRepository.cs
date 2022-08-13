@@ -21,26 +21,27 @@ public class PrayerResponseRepository : IPrayerResponseRepository
             }
             _context.SaveChanges();
     }
-    public IEnumerable<PrayerResponse> GetInbox(int opId)
-    {
-        return _context.PrayerResponses.Where(x => x.opId == opId);
-}
 
     public List<CombinedResponse> GetCombinedResponse(int userId)
     {
         IEnumerable<PrayerResponse> prayerResponses = _context.PrayerResponses.Where(x => x.opId == userId);
         List<CombinedResponse> combinedResponses = new List<CombinedResponse>();
-        CombinedResponse currentCombinedResponse = new CombinedResponse();
-        List<User> userList = _context.Users.ToList();
         foreach (var response in prayerResponses)
         {
-
-            currentCombinedResponse.ministerName = userList.FirstOrDefault(x => x.Id == response.ministerId).FirstName.ToString();
-            currentCombinedResponse.opName = userList.FirstOrDefault(x => x.Id == response.opId).FirstName.ToString();
+            CombinedResponse currentCombinedResponse = new CombinedResponse();
+            PrayerRequest currentRequest = new PrayerRequest();
+            User currentOp = new User();
+            currentOp = _context.Users.FirstOrDefault(x => x.Id == response.opId);
+            User currentMinister = new User();
+            currentMinister = _context.Users.FirstOrDefault(x => x.Id == response.ministerId);
+            currentRequest = _context.PrayerRequests.FirstOrDefault(x => x.RequestId == response.requestId);
+            currentCombinedResponse.ministerName = currentMinister.FirstName.ToString();
+            currentCombinedResponse.responseId = response.responseId;
+            currentCombinedResponse.opName = currentOp.FirstName.ToString();
             currentCombinedResponse.prayerTextResponse = response.prayerTextResponse;
             currentCombinedResponse.responseDateTime = response.dateTime;
-            currentCombinedResponse.requestDateTime = _context.PrayerRequests.FirstOrDefault(x => x.RequestId == response.requestId).DateTime;
-            currentCombinedResponse.requestText = _context.PrayerRequests.FirstOrDefault(x => x.RequestId == response.requestId).PrayerAsk.ToString();
+            currentCombinedResponse.requestDateTime = currentRequest.DateTime;
+            currentCombinedResponse.requestText = currentRequest.PrayerAsk.ToString();
             combinedResponses.Add(currentCombinedResponse);
 
         }

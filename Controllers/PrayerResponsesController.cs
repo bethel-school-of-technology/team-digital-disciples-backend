@@ -28,13 +28,8 @@ namespace WebApi.Controllers
         return new JsonResult(Ok("Prayer Response Added"));
         }
 
-        [HttpGet("inbox/{opId}")]
-        public IEnumerable<PrayerResponse> GetInbox(int opId)
-        {
-        return _prayerResponseRepository.GetInbox(opId);
-        }
 
-        [HttpGet("test/{userId}")]
+        [HttpGet("inbox/{userId}")]
         public List<CombinedResponse> GetCombinedResponses(int userId)
         {
             return _prayerResponseRepository.GetCombinedResponse(userId);
