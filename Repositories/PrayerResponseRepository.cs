@@ -21,10 +21,30 @@ public class PrayerResponseRepository : IPrayerResponseRepository
             }
             _context.SaveChanges();
     }
-    public IEnumerable<PrayerResponse> GetInbox(int opId)
-    {
-        return _context.PrayerResponses.Where(x => x.opId == opId);
-    }
 
-   
+    public List<CombinedResponse> GetCombinedResponse(int userId)
+    {
+        IEnumerable<PrayerResponse> prayerResponses = _context.PrayerResponses.Where(x => x.opId == userId);
+        List<CombinedResponse> combinedResponses = new List<CombinedResponse>();
+        foreach (var response in prayerResponses)
+        {
+            CombinedResponse currentCombinedResponse = new CombinedResponse();
+            PrayerRequest currentRequest = new PrayerRequest();
+            User currentOp = new User();
+            currentOp = _context.Users.FirstOrDefault(x => x.Id == response.opId);
+            User currentMinister = new User();
+            currentMinister = _context.Users.FirstOrDefault(x => x.Id == response.ministerId);
+            currentRequest = _context.PrayerRequests.FirstOrDefault(x => x.RequestId == response.requestId);
+            currentCombinedResponse.ministerName = currentMinister.FirstName.ToString();
+            currentCombinedResponse.responseId = response.responseId;
+            currentCombinedResponse.opName = currentOp.FirstName.ToString();
+            currentCombinedResponse.prayerTextResponse = response.prayerTextResponse;
+            currentCombinedResponse.responseDateTime = response.dateTime;
+            currentCombinedResponse.requestDateTime = currentRequest.DateTime;
+            currentCombinedResponse.requestText = currentRequest.PrayerAsk.ToString();
+            combinedResponses.Add(currentCombinedResponse);
+
+        }
+        return combinedResponses;
+    }
 }

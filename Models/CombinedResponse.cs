@@ -8,10 +8,12 @@ public class CombinedResponse
 
     public string ministerName {get; set;}
 
-    public int opName {get; set;}
+    public string opName {get; set;}
 
     public string prayerTextResponse {get; set;}
 
-    public string dateTime {get; set;}
+    public DateTime responseDateTime {get; set;}
+
+    public DateTime requestDateTime {get ; set;}
     
 }
