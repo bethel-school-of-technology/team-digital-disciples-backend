@@ -40,8 +40,15 @@ public class PrayerResponseRepository : IPrayerResponseRepository
             currentCombinedResponse.opName = currentOp.FirstName.ToString();
             currentCombinedResponse.prayerTextResponse = response.prayerTextResponse;
             currentCombinedResponse.responseDateTime = response.dateTime;
-            currentCombinedResponse.requestDateTime = currentRequest.DateTime;
-            currentCombinedResponse.requestText = currentRequest.PrayerAsk.ToString();
+            if (currentRequest == null){
+                currentCombinedResponse.requestText = "Request Has Been Deleted";
+                currentCombinedResponse.requestDateTime = response.dateTime;
+            }
+            else{
+                currentCombinedResponse.requestDateTime = currentRequest.DateTime;
+                currentCombinedResponse.requestText = currentRequest.PrayerAsk.ToString();
+            }
+            
             combinedResponses.Add(currentCombinedResponse);
 
         }
