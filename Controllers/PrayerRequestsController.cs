@@ -81,7 +81,7 @@ namespace WebApi.Controllers
     [HttpGet("getAll/{UserId}")]
    public IEnumerable<PrayerRequest> GetUserPrayerRequests(int userid)
    {
-      return _prayerRequestRepository.GetUserPrayerRequests(userid);  
+      return _prayerRequestRepository.GetUserPrayerRequests(userid).OrderByDescending(pr => pr.DateTime);  
    }
   
 
