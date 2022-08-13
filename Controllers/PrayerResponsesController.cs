@@ -34,5 +34,11 @@ namespace WebApi.Controllers
         return _prayerResponseRepository.GetInbox(opId);
         }
 
+        [HttpGet("test/{userId}")]
+        public List<CombinedResponse> GetCombinedResponses(int userId)
+        {
+            return _prayerResponseRepository.GetCombinedResponse(userId);
+        }
+
     }
 }
