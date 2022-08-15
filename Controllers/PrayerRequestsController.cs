@@ -5,6 +5,7 @@ using WebApi.Data;
 using System.Collections.Generic;
 using WebApi.Repositories;
 using System.Net;
+using WebApi.Helpers;
 
 namespace WebApi.Controllers
 {
@@ -24,6 +25,7 @@ namespace WebApi.Controllers
       //Create prayer request
       //POST: api/prayerRequests/new
       //TESTED BY CR - WORKS ON POSTMAN 7-26-2022
+      [Authorize]
       [HttpPost("new")] 
       public PrayerRequest CreatePrayerRequest(PrayerRequest aRequest)
       {// do data validation for all fields
@@ -45,6 +47,7 @@ namespace WebApi.Controllers
   //changed method return type to Json Result as we just need to know that it was successfully updated
   //TESTED ON POSTMAN CR - It is WORKING 7-26-2022
   //--------------------------------------------------------------------------------------------
+  [Authorize]
   [HttpPost("updateOne")]
   public JsonResult UpdateRequest(PrayerRequest newRequest)
       {// do data validation for all fields
@@ -67,6 +70,7 @@ namespace WebApi.Controllers
       // GET:api/PrayerRequests/getone/5 
     // GetOnePrayerRequest(RequestId) 
     // TESTED AND WORKING - CR - 7-26-2022
+    [Authorize]
     [HttpGet("getone/{RequestId}")]
 
     public PrayerRequest GetOneRequest(int requestId)
@@ -78,7 +82,8 @@ namespace WebApi.Controllers
   //GetAllPrayerRequests(userId)
  //CHANGED HTTPGet Method from [HttpGet("{UserId}")] to [HttpGet("getAll/{UserId}")]
  //TESTED BY CR ON POSTMAN.  WORKING 7-26-2022
-    [HttpGet("getAll/{UserId}")]
+ [Authorize]
+ [HttpGet("getAll/{UserId}")]
    public IEnumerable<PrayerRequest> GetUserPrayerRequests(int userid)
    {
       return _prayerRequestRepository.GetUserPrayerRequests(userid).OrderByDescending(pr => pr.DateTime);  
@@ -93,6 +98,7 @@ namespace WebApi.Controllers
     //add if statement below to check if true or false and return appropriate message to front end
     //added _context.SaveChages() to the PrayerRequestRepository funtion so that changes would be saved in database
     //TESTED AND WORKING - CR - 7-26-2022
+    [Authorize]
     [HttpDelete("deleteOne/{RequestId}")]
     public JsonResult DeleteOne(int requestId)
     {
@@ -110,6 +116,7 @@ namespace WebApi.Controllers
 // removed bool false out of the function parameter as this function does not require a paremeter to be passed into it.  It simply needs to be excecuted
 //Did the same thing in the interface and repository
 //TESTED AND WORKING - CR - 7-26-2022
+    [Authorize]
     [HttpGet("unresponded")]
     public IEnumerable<PrayerRequest> GetAllFalse()
     {

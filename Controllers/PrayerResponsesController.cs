@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
 using WebApi.Data;
 using WebApi.Repositories;
+using WebApi.Helpers;
 namespace WebApi.Controllers
+
 {
     [Route("api/[Controller]")]
     [ApiController]
@@ -19,6 +21,7 @@ namespace WebApi.Controllers
             _prayerResponseRepository = responseRepo;
             _prayerRequestRepository = requestRepo;
         }
+        [Authorize]
         [HttpPost("new")]
         public JsonResult NewPrayerResponse(PrayerResponse prayerResponse)
         {
@@ -28,7 +31,7 @@ namespace WebApi.Controllers
         return new JsonResult(Ok("Prayer Response Added"));
         }
 
-
+        [Authorize]
         [HttpGet("inbox/{userId}")]
         public List<CombinedResponse> GetCombinedResponses(int userId)
         {

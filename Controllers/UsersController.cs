@@ -53,7 +53,7 @@ public class UsersController : ControllerBase
 
         return Ok(response);
     }
-
+    [Authorize]
     [HttpGet("getone/{userId}")]
     public User GetUserById(int userId)
     {
