@@ -53,6 +53,8 @@ public class UsersController : ControllerBase
 
         return Ok(response);
     }
+    //[HttpPost("logout")]
+    //Logout Function will go here
 
     [HttpGet("getone/{userId}")]
     public User GetUserById(int userId)
