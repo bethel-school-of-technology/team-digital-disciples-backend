@@ -120,7 +120,7 @@ namespace WebApi.Controllers
     [HttpGet("unresponded")]
     public IEnumerable<PrayerRequest> GetAllFalse()
     {
-        return _prayerRequestRepository.GetAllFalse(); 
+        return _prayerRequestRepository.GetAllFalse().OrderByDescending(pr => pr.DateTime);   
     }
       
     }
